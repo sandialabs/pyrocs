@@ -36,9 +36,11 @@ language = 'en'
 extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.coverage",
-    "nbsphinx",
-    'sphinx.ext.autosummary',
+    "sphinx.ext.autosummary",
     'sphinx.ext.napoleon',
+    "nbsphinx",
+    "nbsphinx_link",
+
 ]
 
 
