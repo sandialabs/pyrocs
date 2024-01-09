@@ -1,0 +1,33 @@
+name: docs
+
+on:
+  push:
+    branches: [ master, docstrings ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      # - name: Install pandoc
+      #   run: sudo apt-get update -y && sudo apt-get install -y pandoc
+      - uses: actions/setup-python@v2
+        with: 
+          python-version: '3.11' 
+      # - name: Setup Python 3.11
+      #   run: python -m pip install --upgrade pip
+      - name: Install package and pinned documentation requirements
+        run: |
+          python -m pip install .
+          python -m pip install -r docs/docs_requirements.txt
+      - name: Build documentation
+        run: cd "docs" && make html ; cd "$OLDPWD"
+      - uses: actions/upload-artifact@v3
+        with:
+          name: html-docs
+          path: docs/_build/html

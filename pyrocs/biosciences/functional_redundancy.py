@@ -21,7 +21,7 @@ def functional_redundancy(p: np.array, delta: np.array) -> float:
          δij symmetric array of pairwise functional dissimilarities between species i and j 
 
     Returns:
-    -------
+    --------
     FR : float
         Functional Redundancy Score
 
