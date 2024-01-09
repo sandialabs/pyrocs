@@ -1,4 +1,4 @@
-<img src="pyRoCS/blob/master/docs/_static/pyrocs-icon-1.png" width="400"/>
+<img src="docs/_static/pyrocs-icon-1.png" width="400"/>
 
 # pyRoCS
 
