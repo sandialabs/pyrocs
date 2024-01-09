@@ -1,0 +1,6 @@
+# These are pinned requirements intended for reproduceable building with Python 3.11
+sphinx==7.2.6
+sphinx-rtd-theme==2.0.0
+nbsphinx==0.9.3
+nbsphinx-link==1.3.0
+sphinxcontrib-bibtex==2.6.1
