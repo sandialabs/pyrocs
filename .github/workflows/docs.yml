@@ -1,33 +1,44 @@
 name: docs
-
 on:
   push:
-    branches: [ master, docstrings ]
-
+    branches: [main]
   workflow_dispatch:
-
 jobs:
   build:
+    name: Build the documentation with Sphinx
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: Install pandoc
-        run: sudo apt-get update -y && sudo apt-get install -y pandoc
       - uses: actions/setup-python@v2
         with: 
-          python-version: '3.11' 
-      # - name: Setup Python 3.11
-      #   run: python -m pip install --upgrade pip
+          python-version: '3.11'
       - name: Install package and pinned documentation requirements
         run: |
-          python -m pip install .
-          python -m pip install -r docs/docs_requirements.txt
+          pip install -e .
+          pip install -r docs/docs_requirements.txt
       - name: Build documentation
         run: cd "docs" && make html ; cd "$OLDPWD"
-      - uses: actions/upload-artifact@v3
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
         with:
-          name: html-docs
-          path: docs/_build/html
+          path: 'doc/_build/html'
+
+  deploy:
+    name: Deploy documentation to GitHub Pages
+    needs: build
+    permissions:
+      contents: read
+      pages: write      # to deploy to Pages
+      id-token: write   # to verify the deployment originates from an appropriate source
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
