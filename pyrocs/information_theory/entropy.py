@@ -16,11 +16,11 @@ def discrete_entropy(
         counts (Sequence[int]): Number of times each value was observed
         base (int): Base of returned entropy (default returns number of bits)
     Returns:
-      mutual information between x and y
+        mutual information between x and y
 
     Entropy is often used to measure the state of disorder/randomness in a system. 
     The general equation follows the form:
-        H = - ∑_(𝑖=1)^𝑁▒"[p_i ∗ log_base(p_i)]" 
+    H = - ∑_(𝑖=1)^𝑁▒"[p_i ∗ log_base(p_i)]" 
     where H = entropy, p = discrete probability of the occurrence of an event from the ith category, 
     and N is the total number of categories. Low entropy values indicate a higher state of disorder 
     while higher entropy values indicate a well-ordered system. The maximum possible value of the
