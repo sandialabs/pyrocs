@@ -1,7 +1,7 @@
 .. _index:
 
 .. image:: _static/pyrocs-icon-1.png
-  :width: 400
+    :width: 400
 
 Overview
 ============

@@ -1,7 +1,7 @@
 pyrocs Tutorials
-===============
+================
 
 .. nbgallery::
-   :caption: Tutorials
+    :caption: Tutorials
 
-   tutorials/tutorial_text2time_module
+    tutorials/pyrocs_tutorial
