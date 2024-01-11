@@ -112,7 +112,7 @@ def test_grc():
     Tests the grc() function from pyrocs/complex_systems/grc.py 
     '''
 
-    E_results = grc(E)
+    E_results = grc(E, True)
 
     assert(E_results == 0.03703703703703704)
 
