@@ -13,7 +13,7 @@ def cyclomatic_complexity(A : np.ndarray):
         cyclomatic complexity of the graph   
     '''
 
-    G = nx.from_numpy_matrix(A)
+    G = nx.from_numpy_array(A)
 
     P = nx.number_connected_components(G)
     E = nx.number_of_edges(G)
@@ -33,7 +33,7 @@ def feedback_density(A : np.ndarray):
         feedback density of the graph   
     '''
 
-    G = nx.from_numpy_matrix(A, parallel_edges=False, create_using=nx.MultiDiGraph)
+    G = nx.from_numpy_array(A, parallel_edges=False, create_using=nx.MultiDiGraph)
 
     Etot = nx.number_of_edges(G)
     Ntot = nx.number_of_nodes(G)

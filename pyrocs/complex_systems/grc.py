@@ -19,9 +19,9 @@ def grc(A : np.ndarray, directed : bool):
     """
 
     if directed:
-        G = nx.from_numpy_matrix(A, nx.DiGraph)
+        G = nx.from_numpy_array(A, nx.DiGraph)
     else:
-        G = nx.from_numpy_matrix(A)
+        G = nx.from_numpy_array(A)
         
     if G.number_of_edges() == 0:
         print("WARNING: Social network to compute GRC over has no edges!")
