@@ -1,15 +1,24 @@
-
-
-
 import numpy as np
 # from scipy.special import xlogy
 
 def kl_divergence(p: np.array, q: np.array, base: int = 2) -> np.array:
     """
-    Sometimes called relative entropy, the Kullback-Leibler Divergence (KLD) measures the similarity between two distributions (one a sample and the other a reference). 
-    In contrast to the continuous version available in [scipy](https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.kl_div.html), the formulation in this package uses a discrete form of the equation following [Jost 2021](https://www.frontiersin.org/articles/10.3389/fams.2021.641239/full):
-    D(p||q) = - ∑_(𝑖=1)^𝑁▒"[p_i ∗ log_base(p_i/q_i)]" 
-    where D is the KLD value, N is the total number of categories, and p_i and q_i reflect the discrete probability of the occurrence of an event from the ith category of the sample distribution and reference distribution respectively.
+    Sometimes called relative entropy, the Kullback-Leibler Divergence (KLD) 
+    measures the similarity between two distributions 
+    (one a sample and the other a reference). 
+    In contrast to the continuous version available in 
+    `scipy <https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.kl_div.html>`_, 
+    the formulation in this package uses a discrete form of the equation 
+    following :cite:p:`jost_information_2021`:
+    
+    .. math::
+    
+        D(p||q) = - \\sum_{i=1}^N[p_i * \\log (p_i/q_i)]
+        
+    where :math:`D` is the KLD value, :math:`N` is the total number of categories, 
+    and :math:`p_i` and :math:`q_i` reflect the discrete probability of the occurrence 
+    of an event from the :math:`i`th category of the sample distribution and 
+    reference distribution respectively.
 
     The function is able to calculate KLD for cases where not all categories from the reference distribution are present within the sample distribution. 
 
@@ -52,18 +61,29 @@ def novelty_transience_resonance(thetas_arr : np.array, window : int) -> list:
     future sequence. In contrast, and resonance reflects the “stickiness” of “new” topics between the 
     past and the future; it is calculated by taking the difference between novelty and transience. 
 
-    The equations for these calculations are sourced from [Barron et al., 2018](https://www.pnas.org/doi/10.1073/pnas.1717729115) 
-    N_w(p_i) = (1/w)Sum(1 <= k <= w)[D(p_i || p_(i-k))]
-    T_w(p_i) = (1/w)Sum(1 <= k <= w)[D(p_i || p_(i+k))]
-    R_w(p_i) = N_w(p_i) - T_w(p_i)
-    where N is novelty, T is transience, R is resonance, w is the number of distributions to use either
-    in the past or the future, p is the proportion of entries that belong to the ith category, 
-    k is the window of interest, and D is the equation for the KLD
+    The equations for these calculations are sourced from Barron et al. 
+    :cite:p:`barron_individuals_2018`. 
+    
+    .. math::
+    
+        N_w(p_i) &= (1/w)Sum(1 \\leq k \\leq w)[D(p_i || p_(i-k))]\\\\
+        T_w(p_i) &= (1/w)Sum(1 \\leq k \\leq w)[D(p_i || p_(i+k))]\\\\
+        R_w(p_i) &= N_w(p_i) - T_w(p_i)
+        
+    where :math:`N` is novelty, :math:`T` is transience, :math:`R` is resonance, 
+    :math:`w` is the number of distributions to use either
+    in the past or the future, :math:`p` is the proportion of entries that 
+    belong to the ith category, 
+    :math:`k` is the window of interest, and :math:`D` is the 
+    equation for the KLD.
 
     Args:
         thetas_arr (numpy.ndarray): rows are topic mixtures
         window (int): positive integer defining scale or scale size
-    
+    Returns:
+        novelties 
+        transiences 
+        resonances    
     """
 
     # Find the first and last center speech offset, given window size.

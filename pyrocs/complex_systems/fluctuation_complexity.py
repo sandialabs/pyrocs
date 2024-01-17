@@ -5,12 +5,23 @@ from functools import lru_cache
 def fluctuation_complexity(A : list, L : int = 1):
     '''
     
-    Fluctuating complexity extends the characterization of discrete entropy to consider the ordering of states, by measuring the variation of probability between adjacent events. Specifically, the fluctuating complexity measures the probability of an event immediately following another event by calculating the mean squared difference between the log(probability) of these events.
+    Fluctuating complexity extends the characterization of discrete entropy 
+    to consider the ordering of states, by measuring the variation of probability 
+    between adjacent events. Specifically, the fluctuating complexity measures 
+    the probability of an event immediately following another event by 
+    calculating the mean squared difference between the log(probability) of these events.
         
-    The equation within the package follows the formulation from [Parrott, 2010](https://complexity-ok.sites.olt.ubc.ca/files/2014/09/Parrott_EcoInd_2010.pdf) as follows:
-    CF = - ∑_(𝑖,𝑗=1)^𝑁▒〖"[" 𝑝_(𝐿,𝑖𝑗) "∗ " 〖"(" log⁡_2 𝑝_(𝐿,𝑖)/𝑝_(𝐿,𝑗)  ")" 〗^2 "]" 〗
+    The equation within the package follows the formulation from 
+    :cite:p:`parrott_measuring_2010` as follows:
     
-    where CF is the fluctuating complexity, 𝑝_(𝐿,𝑖𝑗) refers to the probability of observing event j immediately following the word I in a series of length L, and 𝑝_(𝐿,𝑖) and 𝑝_(𝐿,𝑗) correspond to the respective frequencies of event i and j within the series. 
+    .. math::
+        C_F = - \\sum_{i,j=1}^n p_{L,ij} \\left(\\log_2\\frac{p_{L,i}}{p_{L,j}}\\right) ^2
+    
+    where :math:`C_F` is the fluctuating complexity, 
+    :math:`p_{L,ij}` refers to the probability of observing event j 
+    immediately following the word I in a series of 
+    length L, and :math:`p_{L,i}` and :math:`p_{L,j}` correspond to the 
+    respective frequencies of event :math:`i` and :math:`j` within the series. 
     
     Args:
         A: Sequence of symbols
