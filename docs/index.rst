@@ -40,11 +40,14 @@ and complex system equations). Associated literature that describes
 the origins of all of the pyRoCS equations are included in the 
 documentation. The package also contains example datasets and 
 tutorials to help demonstrate how the functions can be used.
-    
+
+To get started, we recommend exploring the pyrocs :ref:`tutorials<tutorials>`.
+
 .. toctree::
     :maxdepth: 1
-    :caption: Available resources:
+    :hidden:
     
     Overview <self>
     tutorials
     apidoc
+    references
