@@ -2,14 +2,20 @@ import numpy as np
 
 def functional_redundancy(p: np.array, delta: np.array) -> float:
     '''
-    This metric evaluates how interchangeable groups within a population are based on the specific function they perform. As a biological concept, functional redundancy reflects the extent to which different species within a community have the same ecological role.
+    This metric evaluates how interchangeable groups within a population are based 
+    on the specific function they perform. As a biological concept, 
+    functional redundancy reflects the extent to which different species 
+    within a community have the same ecological role.
 
-    The equation within the package follows the formulation given in [Ricotta et al., 2016](https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/2041-210X.12604) 
-	R= 1-(Q/D)
-		where
-		Q=sum(p_i*(sum(p_j*δ_ij))
-		D=sum(p_i*(1-p_i))
+    The equation within the package follows the formulation given 
+    in :cite:p:`ricotta_measuring_2016`.
     
+    .. math::
+        
+        R &= 1-(Q/D) \\\\
+        &\\text{where} \\\\
+        Q &= \\sum_i(p_i*(\\sum_j(p_j*δ_{ij})) \\\\
+        D &= \\sum_i(p_i*(1-p_i))
 
     Args:
     ----------
@@ -17,8 +23,8 @@ def functional_redundancy(p: np.array, delta: np.array) -> float:
         Relative abundances p[i] (i = 1, 2,…,N) with 0 < p[i] ≤ 1 and where the constraint 0 < p[i]
         means that all calculations involve only those species that are actually present in 
         the assemblage with nonzero abundances.
-    δ : np.array
-         δij symmetric array of pairwise functional dissimilarities between species i and j 
+    delta : np.array
+        :math:`δ_{ij}` symmetric array of pairwise functional dissimilarities between species i and j 
 
     Returns:
     --------

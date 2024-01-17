@@ -4,9 +4,24 @@ import networkx as nx
 
 def cyclomatic_complexity(A : np.ndarray):
     '''
-    Cyclomatic complexity reflects the number of linearly independent paths within a system of interest and can be calculated using the number of edges (E), nodes (N), and connected components (P) [Ebert et al., 2016] (https://ieeexplore.ieee.org/abstract/document/7725232). The equation within the package follows the formulations from [Naugle et al., 2021] (https://www.tandfonline.com/doi/abs/10.1080/17477778.2021.1982653) as follows:
-    M = E - N + 2P,
-    where M is the cyclomatic complexity, E is the total number of edges, N is the total number of nodes, and P are the number of connected components. Generally, lower cyclomatic complexity values indicate that the content has fewer interconnections and thus, can be understood more linearly (relative to higher cyclomatic complexity values).     
+    Cyclomatic complexity reflects the number of linearly 
+    independent paths within a system of interest 
+    and can be calculated using the number of edges 
+    (E), nodes (N), and connected components (P)
+    :cite:p:`ebert_cyclomatic_2016`.
+    The equation within the package follows the formulations from
+    :cite:p:`naugle_feedback_2023` as follows:
+    
+    .. math::
+        M = E - N + 2P,
+    
+    where :math:`M` is the cyclomatic complexity, :math:`E` is the total number 
+    of edges, :math:`N` is the total number of nodes, and :math:`P` is 
+    the number of connected components. Generally, lower cyclomatic 
+    complexity values indicate that the content has fewer interconnections 
+    and thus, can be understood more linearly (relative to 
+    higher cyclomatic complexity values).     
+    
     Args:
         A: array
     Returns:
@@ -24,9 +39,24 @@ def cyclomatic_complexity(A : np.ndarray):
 
 def feedback_density(A : np.ndarray):
     '''
-    Feedback density captures the fraction of edges (𝐸_𝑙𝑜𝑜𝑝) and nodes (𝑁_𝑙𝑜𝑜𝑝) that are involved in at least one feedback loop. As such, it reflects the potential for cyclic behaviors. The equation within the package follows the formulations from [Naugle et al., 2021] (https://www.tandfonline.com/doi/abs/10.1080/17477778.2021.1982653) as follows:
-    D = (𝐸_𝑙𝑜𝑜𝑝+𝑁_𝑙𝑜𝑜𝑝)/(𝐸+𝑁),
-    where D is the feedback density, 𝐸_𝑙𝑜𝑜𝑝 is the fraction of edges, 𝑁_𝑙𝑜𝑜𝑝 is the fraction of nodes, E is the total number of edges, and N is the total number of nodes. Feedback density values are normalized between 0 and 1, where 0 indicates that no feedback loops (i.e., paths that begin and ened at the same node) are present in the system while 1 indicates all nodes and edges are included in one or more feedback loops. 
+    Feedback density captures the fraction of edges :math:`(E_{loop})` 
+    and nodes (:math:`N_{loop}`) that are involved in at least one feedback loop.
+    As such, it reflects the potential for cyclic behaviors. 
+    The equation within the package follows the formulations 
+    from :cite:p:`naugle_feedback_2023`
+    as follows:
+    
+    .. math ::
+        D = (E_{loop}+N_{loop})/(E+N),
+    
+    where D is the feedback density, :math:`E_{loop}` is the fraction of edges, 
+    :math:`N_{loop}` is the fraction of nodes, :math:`E` is the total number of edges, 
+    and :math:`N` is the total number of nodes. Feedback density values 
+    are normalized between 0 and 1, where 0 indicates that no
+    feedback loops (i.e., paths that begin and ened at the same node) 
+    are present in the system while 1 indicates all nodes and 
+    edges are included in one or more feedback loops.
+    
     Args:
         A: array
     Returns:
@@ -59,9 +89,32 @@ def feedback_density(A : np.ndarray):
 
 def causal_complexity(A: np.ndarray):
     '''
-    Causal complexity measures the underlying causal structure of a system by considering both the system’s intricacy as well as interconnectedness. The equation within the package follows the formulations from [Naugle et al., 2021] (https://www.tandfonline.com/doi/abs/10.1080/17477778.2021.1982653), who generate a non-normalized measure of causal complexity as a product of cyclomatic complexity and 1 + feedback density as follows:
-    C = M*(1+D) = (E - N + 2P) * (1+(𝐸_𝑙𝑜𝑜𝑝+𝑁_𝑙𝑜𝑜𝑝)/(𝐸+𝑁)),
-    where C is the causal complexity, M is the cyclomatic complexity, and D is the feedback density. Cyclomatic complexity reflects the number of linearly independent paths within a system of interest and can be calculated using the number of edges (E), nodes (N), and connected components (P) [Ebert et al., 2016] (https://ieeexplore.ieee.org/abstract/document/7725232). In contrast, feedback density captures the fraction of edges (𝐸_𝑙𝑜𝑜𝑝) and nodes (𝑁_𝑙𝑜𝑜𝑝) that are involved in at least one feedback loop. As such, it reflects the potential for cyclic behaviors. Jointly, the measure of causal complexity reflects the number of paths through a system weighted to reflect those with feedback loops. Thus, systems with more feedback density will have higher values of causal complexity than those systems with lower feedback density.
+    Causal complexity measures the underlying causal structure 
+    of a system by considering both the system’s intricacy as
+    well as interconnectedness. The equation within the package 
+    follows the formulations from
+    :cite:p:`naugle_feedback_2023`,
+    who generate a non-normalized measure of causal complexity as a 
+    product of cyclomatic complexity and 1 + feedback density as follows:
+    
+    .. math::
+    
+        C = M*(1+D) = (E - N + 2P) * (1+(E_{loop}+N_{loop})/(E+N)),
+
+    where :math:`C` is the causal complexity, :math:`M` is the cyclomatic 
+    complexity, and :math:`D` is the feedback density. Cyclomatic complexity 
+    reflects the number of linearly independent paths within a system 
+    of interest and can be calculated using the number of edges 
+    (:math:`E`), nodes (:math:`N`), and connected components (:math:`P`) 
+    :cite:p:`ebert_cyclomatic_2016`. 
+    In contrast, feedback density captures the fraction of edges 
+    (:math:`E_{loop}`) and nodes (:math:`N_loop`) that are involved in at least one 
+    feedback loop. As such, it reflects the potential for cyclic behaviors. 
+    Jointly, the measure of causal complexity reflects the number of paths 
+    through a system weighted to reflect those with feedback loops. 
+    Thus, systems with more feedback density will have higher values 
+    of causal complexity than those systems with lower feedback density.
+    
     Args:
         A: array
     Returns:

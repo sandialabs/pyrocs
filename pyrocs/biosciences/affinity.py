@@ -7,15 +7,21 @@ from pandas import DataFrame
 def affinity(data: Union[np.array, DataFrame], weights=None, to_bool=bool) -> np.array:
     """
     Returns the affinity between all pairs of columns in binary data.
+
+    This metric evaluates the likelihood of two species to co-occur, 
+    by evaluating the log odds ratio. Unlike other co-occurrence formulations, 
+    the affinity model is insensitive to the relative prevalence of the two species. 
+    The equation for Affinity is based on the formulation in :cite:p:`mainali_better_2022`.
     
-    This metric evaluates the likelihood of two species to co-occur, by evaluating the log odds ratio. Unlike other co-occurrence formulations, the affinity model is insensitive to the relative prevalence of the two species. 
-
-    The equation for Affinity is based on the formulation in [Mainali et al., 2022](https://www.science.org/doi/10.1126/sciadv.abj9204) 
-	α = log ((p_1/(1-p_1))/ (p_2/(1-p_2)))
-    where
-	 α is the affinity, p_1 and p_2 are the probability of species 1 and species 2 respectively
-
-    The normalization of each species probability by its complement (i.e., 1-p) results in a binary implementation of affinity within this software.
+    .. math::
+    
+        \\alpha = \\log((p_1/(1-p_1))/ (p_2/(1-p_2)))
+    
+    where :math:`\\alpha` is the affinity, :math:`p_1` and :math:`p_2` are the 
+    probability of species 1 and species 2 respectively
+    
+    The normalization of each species probability by its complement (i.e., :math:`1-p`) 
+    results in a binary implementation of affinity within this software.
     
     Args:
         data: array or dataframe 
@@ -23,7 +29,7 @@ def affinity(data: Union[np.array, DataFrame], weights=None, to_bool=bool) -> np
         to_bool: boolean type
         
     Returns:
-      affinity between columns in data
+        affinity between columns in data
     
     """
     

@@ -12,17 +12,28 @@ def mutual_info(
         counts: Sequence = None,
         base: int = 2) -> float:
     """
-    Mutual information measures how much knowledge is gained about one random variable when another is observed. It is also a measure of mutual dependence between the random variables. 
+    Mutual information measures how much knowledge is gained about one random variable when another is observed.
+    It is also a measure of mutual dependence between the random variables.
 
-    The equation within the package follows the formulations from Cover and Thomas [Cover & Thomas, 2005] (https://onlinelibrary.wiley.com/doi/book/10.1002/047174882X) using both individual and the joint entropies, 
-    I(X;Y)=H(X)+H(Y)-H(X,Y)
-    where
-    I(X;Y) is the mutual information of X and Y
-    H(X) is the entropy for random variable X alone
-    H(Y) is the entropy for random variable Y alone
-    H(X,Y) is the joint entropy across both X and Y
+    The equation within the package follows the formulations from 
+    Cover and Thomas :cite:p:`cover_elements_2005`
+    using both individual and the joint entropies,
+    
+    .. math::
+    
+        I(X;Y)=H(X)+H(Y)-H(X,Y)
+    
+    where :math:`I(X;Y)` is the mutual information of :math:`X` and :math:`Y`, 
+    :math:`H(X)` is the entropy for random variable :math:`X` alone, 
+    :math:`H(Y)` is the entropy for random variable :math:`Y` alone, 
+    and :math:`H(X,Y)` is the joint entropy across both :math:`X` and :math:`Y`.
 
-    Mutual information ranges from 0 to the minimum of (H(X),H(Y)). Higher values indicate that more information is shared (i.e., mutual dependence is greater) between the two random variables, X and Y. Thus, higher values of mutual information indicate that more information can be gained about one variable when the other is observed. 
+    Mutual information ranges from 0 to the minimum of :math:`(H(X),H(Y))`. 
+    Higher values indicate that more information is shared 
+    (i.e., mutual dependence is greater) between the two random 
+    variables, :math:`X` and :math:`Y`. Thus, higher values of mutual information 
+    indicate that more information can be gained about one variable 
+    when the other is observed.
 
     Args:
         x,y (numpy.ndarray): arrays, discretized observations from random
