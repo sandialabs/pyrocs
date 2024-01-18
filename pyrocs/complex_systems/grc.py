@@ -4,7 +4,11 @@ import numpy as np
 
 def grc(A : np.ndarray, directed : bool):
     """
-    Global reaching centrality (GRC) measures the level of hierarchy within a network based on flow. The equation within the package follows the formulations from [Mones et al., 2012] (https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0033799), who quantify GRC as the difference between the maximum and the average value of the local reach centralities of nodes within the network:
+    Global reaching centrality (GRC) measures the level of hierarchy within a network based on flow. 
+    The equation within the package follows the formulations from 
+    :cite:p:`mones_hierarchy_2012`, 
+    who quantify GRC as the difference between the maximum and the average value of the
+    local reach centralities of nodes within the network:
     
     .. math::
     

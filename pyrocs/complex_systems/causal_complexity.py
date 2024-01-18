@@ -108,7 +108,7 @@ def causal_complexity(A: np.ndarray):
     (:math:`E`), nodes (:math:`N`), and connected components (:math:`P`) 
     :cite:p:`ebert_cyclomatic_2016`. 
     In contrast, feedback density captures the fraction of edges 
-    (:math:`E_{loop}`) and nodes (:math:`N_loop`) that are involved in at least one 
+    (:math:`E_{loop}`) and nodes (:math:`N_{loop}`) that are involved in at least one 
     feedback loop. As such, it reflects the potential for cyclic behaviors. 
     Jointly, the measure of causal complexity reflects the number of paths 
     through a system weighted to reflect those with feedback loops. 
