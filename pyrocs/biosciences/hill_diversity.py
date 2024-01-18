@@ -10,7 +10,7 @@ def hill_shannon(p: np.array) -> float:
     The use of the geometric mean captures 
     the proportional difference from the mean of extreme values (rather than the absolute values). 
     The equation for the Hill-Simpson based on the formulation in 
-    [Roswell et al., 2021](https://doi.org/10.1111/oik.07202)
+    :cite:p:`roswell_conceptual_2021`.
     
     Hill Shannon (Perplexity): 
     
