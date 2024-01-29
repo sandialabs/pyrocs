@@ -5,49 +5,28 @@
 
 Overview
 ============
-This software package is designed to support analysis evaluating Resilience 
-of Complex Systems (RoCS). Resilience is the ability of the complex system 
-being analyzed to withstand, operate through, and recover from a disruption. 
-The complex system may be a physical system such as an electric grid, 
-an organization such as a company, or even a subfunction of an organization. 
-Existing mathematical equations for resilience analysis are found within 
-multiple domains including information theory, biological sciences, 
-and complex systems. This package synthesizes and refactors equations 
-from these various domains to make them more generalizable for 
-application across different types of complex systems relevant 
-for resilience analysis. Users will be able to apply these 
-equations to characterize different components of complex 
-systems based on available data.  
-
-The pyRoCS package includes mathematical formulations of equations from 
-three different domains including information theory, biosciences, and 
-complex systems. The information theory equations include formulations of 
-entropy; Kullback-Leibler Divergence (KLD); novelty, transience, and 
-resonance (NTR); and mutual information. The biosciences equations include 
-formulations of Hill diversity, affinity, and functional redundancy. 
-Lastly, the complex systems equations include formulations of global 
-reaching centrality, cyclomatic complexity, and fluctuating complexity. 
-While these equations are applicable within their specific domains, 
-they can also be applied to resilience analysis of any complex system. 
-Accordingly, their formulations and associated documentation have 
-been generalized in this package to apply across domains. Some of 
-the metrics modifications made for pyRoCS package include: exposing 
-more inputs to the user and enabling them to be implemented with 
-different types of data structures than currently available in scipy 
-(information theory equations), converting equations within the 
-literature into a formal python-based software environment (biosciences 
-and complex system equations). Associated literature that describes 
-the origins of all of the pyRoCS equations are included in the 
-documentation. The package also contains example datasets and 
-tutorials to help demonstrate how the functions can be used.
+The purpose of pyRoCS is to support characterization, evaluation, and learning to inform 
+improvements in complex systems. Specifically, the focus on resilience draws attention 
+to the ability of a complex system to withstand, operate through, and recover from a 
+disruption. The complex system may be a physical system such as an electric grid, 
+an organization such as a company, or even a subfunction of an organization. Existing 
+mathematical equations for resilience analysis are found within multiple domains including 
+information theory, biological sciences, and complex systems. This package synthesizes and 
+refactors equations from these various domains to generalize their implementations in a 
+Python environment. 
 
 To get started, we recommend exploring the pyrocs :ref:`tutorials<tutorials>`.
+
+The :ref:`API documentation<apidoc>` provides additional details about the functions included in the package.
 
 .. toctree::
     :maxdepth: 1
     :hidden:
     
     Overview <self>
+    installation
     tutorials
+    contributing
+    development
     apidoc
     references
