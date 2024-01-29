@@ -11,7 +11,9 @@ pyRoCS can be installed using `pip`
 
 Alternatively, pyRoCS can be installed through GitHub
 
-    
+    git clone https://github.com/sandialabs/pyrocs.git
+    cd pyrocs
+    pip install .
 
 ## Tutorials
 To get started with pyRoCS, we recommend working through the [tutorials](https://sandialabs.github.io/pyrocs/tutorials.html).
