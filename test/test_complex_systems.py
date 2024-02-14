@@ -4,30 +4,13 @@ import pytest
 
 
 ########## GLOBAL VARIABLES ##########
-A = np.array([
-    [0,0,1],
-    [0,0,1],
-    [0,0,0]
-])
+A = [[0, 0, 1], [0, 0, 1], [0, 0, 0]]
 
-B = np.array([
-    [0,1,1],
-    [0,0,1],
-    [0,0,0]
-])
+B = [[0, 1, 1], [0, 0, 1], [0, 0, 0]]
 
-C = np.array([
-    [0,1,0],
-    [0,0,1],
-    [1,0,0]
-])
+C = [[0, 1, 0], [0, 0, 1], [1, 0, 0]]
 
-D = np.array([
-    [0,1,0,0],
-    [0,0,1,0],
-    [1,0,0,0],
-    [0,0,0,0]
-])
+D = [[0, 1, 0, 0], [0, 0, 1, 0], [1, 0, 0, 0], [0, 0, 0, 0]]
 
 E = np.array([
     [0, 1, 0, 0, 1, 0, 0, 0, 1, 1,],
@@ -49,41 +32,34 @@ def test_cyclomatic_complexity():
     Tests the cyclomatic_complexity() function from pyrocs/complex_systems/causal_complexity.py 
     '''
 
-    A_results = cyclomatic_complexity(A)
-    B_results = cyclomatic_complexity(B)
-    C_results = cyclomatic_complexity(C)
-    D_results = cyclomatic_complexity(D)
-    
-    assert(A_results == 1)
-    assert(B_results == 2)
-    assert(C_results == 2)
-    assert(D_results == 3)
+    g1 = np.array(A)
+    assert cyclomatic_complexity(g1, directed=True) == 1.0
 
-    print(A_results)
-    print(B_results)
-    print(C_results)
-    print(D_results)
+    g2 = np.array(B)
+    assert cyclomatic_complexity(g2, directed=True) == 2.0
+
+    g3 = np.array(C)
+    assert cyclomatic_complexity(g3, directed=True) == 2.0
+
+    g4 = np.array(D)
+    assert cyclomatic_complexity(g4, directed=True) == 3.0
 
 
 def test_feedback_density():
     '''
     Tests the feedback_density() function from pyrocs/complex_systems/causal_complexity.py 
     '''
+    g1 = np.array(A)
+    assert feedback_density(g1, directed=True) == 0.0
 
-    A_results = feedback_density(A)
-    B_results = feedback_density(B)
-    C_results = feedback_density(C)
-    D_results = feedback_density(D)
+    g2 = np.array(B)
+    assert feedback_density(g2, directed=True) == 0.0
 
-    assert(A_results == 0)
-    assert(B_results == 0)
-    assert(C_results == 1)
-    assert(D_results == 0.8571428571428571)
+    g3 = np.array(C)
+    assert feedback_density(g3, directed=True) == 1.0
 
-    print(A_results)
-    print(B_results)
-    print(C_results)
-    print(D_results)
+    g4 = np.array(D)
+    assert feedback_density(g4, directed=True) == 0.8571428571428571
 
 
 def test_causal_complexity():
@@ -91,20 +67,17 @@ def test_causal_complexity():
     Tests the causal_complexity() function from pyrocs/complex_systems/causal_complexity.py 
     '''
 
-    A_results = causal_complexity(A)
-    B_results = causal_complexity(B)
-    C_results = causal_complexity(C)
-    D_results = causal_complexity(D)
+    g1 = np.array(A)
+    assert causal_complexity(g1, directed=True) == 1.0
 
-    assert(A_results == 1)
-    assert(B_results == 2)
-    assert(C_results == 4)
-    assert(D_results == 5.571428571428571)
+    g2 = np.array(B)
+    assert causal_complexity(g2, directed=True) == 2.0
 
-    print(A_results)
-    print(B_results)
-    print(C_results)
-    print(D_results)
+    g3 = np.array(C)
+    assert causal_complexity(g3, directed=True) == 4.0
+
+    g4 = np.array(D)
+    assert causal_complexity(g4, directed=True) == 5.571428571428571
 
 
 def test_grc():
@@ -115,9 +88,6 @@ def test_grc():
     E_results = grc(E, True)
 
     assert(E_results == 0.03703703703703704)
-
-    print(E_results)
-
 
 if __name__ == '__main__': 
     test_cyclomatic_complexity()

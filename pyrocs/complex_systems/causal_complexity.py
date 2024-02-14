@@ -41,8 +41,7 @@ def cyclomatic_complexity(A : np.ndarray, directed : bool = False):
         P = nx.number_connected_components(G)
 
 
-    return E - N + 2 * P 
-
+    return E - N + 2.0 * P 
 
 def feedback_density(A : np.ndarray, directed : bool = False):
     '''
@@ -96,7 +95,6 @@ def feedback_density(A : np.ndarray, directed : bool = False):
 
     return (Eloop + Nloop) / (Etot + Ntot)
 
-
 def causal_complexity(A: np.ndarray, directed : bool = False):
     '''
     Causal complexity measures the underlying causal structure 
@@ -134,11 +132,3 @@ def causal_complexity(A: np.ndarray, directed : bool = False):
     D = feedback_density(A, directed=directed)
 
     return (M * (1. + D))
-
-
-if __name__ == '__main__':
-    A = np.array([[0, 1, 0], [0, 0, 1], [1, 0, 0]])
-    print(cyclomatic_complexity(A, directed=True))
-
-    # A = np.array([[0, 1, 1], [0, 0, 1], [1, 0, 0]])
-    # print(cyclomatic_complexity(A, directed=True))
