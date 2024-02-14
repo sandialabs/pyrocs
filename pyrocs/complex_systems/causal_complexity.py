@@ -2,7 +2,7 @@ import numpy as np
 import networkx as nx
 
 
-def cyclomatic_complexity(A : np.ndarray):
+def cyclomatic_complexity(A : np.ndarray, directed : bool = False):
     '''
     Cyclomatic complexity reflects the number of linearly 
     independent paths within a system of interest 
@@ -28,16 +28,22 @@ def cyclomatic_complexity(A : np.ndarray):
         cyclomatic complexity of the graph   
     '''
 
-    G = nx.from_numpy_array(A)
+    if directed:
+        G = nx.from_numpy_array(A, parallel_edges=False, create_using=nx.MultiDiGraph)
+        E = nx.number_of_edges(G)
+        N = nx.number_of_nodes(G)
+        G_undirected = G.to_undirected()
+        P = nx.number_connected_components(G_undirected)
+    else:
+        G = nx.from_numpy_array(A, parallel_edges=False)
+        E = nx.number_of_edges(G)
+        N = nx.number_of_nodes(G)
+        P = nx.number_connected_components(G)
 
-    P = nx.number_connected_components(G)
-    E = nx.number_of_edges(G)
-    N = nx.number_of_nodes(G)
 
-    return E - N + 2 * P 
+    return E - N + 2.0 * P 
 
-
-def feedback_density(A : np.ndarray):
+def feedback_density(A : np.ndarray, directed : bool = False):
     '''
     Feedback density captures the fraction of edges :math:`(E_{loop})` 
     and nodes (:math:`N_{loop}`) that are involved in at least one feedback loop.
@@ -53,7 +59,7 @@ def feedback_density(A : np.ndarray):
     :math:`N_{loop}` is the fraction of nodes, :math:`E` is the total number of edges, 
     and :math:`N` is the total number of nodes. Feedback density values 
     are normalized between 0 and 1, where 0 indicates that no
-    feedback loops (i.e., paths that begin and ened at the same node) 
+    feedback loops (i.e., paths that begin and end at the same node) 
     are present in the system while 1 indicates all nodes and 
     edges are included in one or more feedback loops.
     
@@ -63,7 +69,10 @@ def feedback_density(A : np.ndarray):
         feedback density of the graph   
     '''
 
-    G = nx.from_numpy_array(A, parallel_edges=False, create_using=nx.MultiDiGraph)
+    if directed: 
+        G = nx.from_numpy_array(A, parallel_edges=False, create_using=nx.MultiDiGraph)
+    else:
+        G = nx.from_numpy_array(A, parallel_edges=False)
 
     Etot = nx.number_of_edges(G)
     Ntot = nx.number_of_nodes(G)
@@ -86,8 +95,7 @@ def feedback_density(A : np.ndarray):
 
     return (Eloop + Nloop) / (Etot + Ntot)
 
-
-def causal_complexity(A: np.ndarray):
+def causal_complexity(A: np.ndarray, directed : bool = False):
     '''
     Causal complexity measures the underlying causal structure 
     of a system by considering both the system’s intricacy as
@@ -120,7 +128,7 @@ def causal_complexity(A: np.ndarray):
     Returns:
         causal complexity of the graph
     '''
-    M = cyclomatic_complexity(A)
-    D = feedback_density(A)
+    M = cyclomatic_complexity(A, directed=directed)
+    D = feedback_density(A, directed=directed)
 
     return (M * (1. + D))
