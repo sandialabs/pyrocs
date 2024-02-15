@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='utf-8'?>
+<gexf xmlns="http://www.gexf.net/1.2draft" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd" version="1.2">
+  <meta lastmodifieddate="2024-02-15">
+    <creator>NetworkX 3.2.1</creator>
+  </meta>
+  <graph defaultedgetype="directed" mode="static" name="">
+    <attributes mode="static" class="node">
+      <attribute id="0" title="x" type="double" />
+      <attribute id="1" title="y" type="double" />
+      <attribute id="2" title="type" type="string" />
+    </attributes>
+    <nodes>
+      <node id="Att" label="Att">
+        <attvalues>
+          <attvalue for="0" value="0.0" />
+          <attvalue for="1" value="4.0" />
+          <attvalue for="2" value="Att" />
+        </attvalues>
+      </node>
+      <node id="Env" label="Env">
+        <attvalues>
+          <attvalue for="0" value="1.0" />
+          <attvalue for="1" value="3.0" />
+          <attvalue for="2" value="Env" />
+        </attvalues>
+      </node>
+      <node id="S5" label="S5">
+        <attvalues>
+          <attvalue for="0" value="3.0" />
+          <attvalue for="1" value="1.0" />
+          <attvalue for="2" value="S5" />
+        </attvalues>
+      </node>
+      <node id="S1_1" label="S1_1">
+        <attvalues>
+          <attvalue for="0" value="4.0" />
+          <attvalue for="1" value="4.0" />
+          <attvalue for="2" value="S1" />
+        </attvalues>
+      </node>
+      <node id="S1_2" label="S1_2">
+        <attvalues>
+          <attvalue for="0" value="3.0" />
+          <attvalue for="1" value="3.0" />
+          <attvalue for="2" value="S1" />
+        </attvalues>
+      </node>
+      <node id="S1_3" label="S1_3">
+        <attvalues>
+          <attvalue for="0" value="2.0" />
+          <attvalue for="1" value="2.0" />
+          <attvalue for="2" value="S1" />
+        </attvalues>
+      </node>
+      <node id="S1_4" label="S1_4">
+        <attvalues>
+          <attvalue for="0" value="1.0" />
+          <attvalue for="1" value="1.0" />
+          <attvalue for="2" value="S1" />
+        </attvalues>
+      </node>
+      <node id="S1_5" label="S1_5">
+        <attvalues>
+          <attvalue for="0" value="0.0" />
+          <attvalue for="1" value="0.0" />
+          <attvalue for="2" value="S1" />
+        </attvalues>
+      </node>
+    </nodes>
+    <edges>
+      <edge source="Att" target="Env" id="0" />
+      <edge source="Env" target="S1_1" id="1" />
+      <edge source="Env" target="S1_2" id="2" />
+      <edge source="Env" target="S1_3" id="3" />
+      <edge source="Env" target="S1_4" id="4" />
+      <edge source="Env" target="S1_5" id="5" />
+      <edge source="S5" target="Env" id="6" label="feedback" />
+      <edge source="S5" target="S1_1" id="7" label="feedback" />
+      <edge source="S5" target="S1_2" id="8" label="feedback" />
+      <edge source="S5" target="S1_3" id="9" label="feedback" />
+      <edge source="S5" target="S1_4" id="10" label="feedback" />
+      <edge source="S5" target="S1_5" id="11" label="feedback" />
+      <edge source="S1_1" target="S5" id="12" />
+      <edge source="S1_2" target="S5" id="13" />
+      <edge source="S1_3" target="S5" id="14" />
+      <edge source="S1_4" target="S5" id="15" />
+      <edge source="S1_5" target="S5" id="16" />
+    </edges>
+  </graph>
+</gexf>
