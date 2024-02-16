@@ -14,3 +14,4 @@ captured in the below tutorials.
     :caption: Tutorials
 
     tutorials/pyrocs_tutorial
+    tutorials/pyrocs_tutorial_structural_comparisons
