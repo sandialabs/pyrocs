@@ -13,5 +13,5 @@ captured in the below tutorials.
 .. nbgallery::
     :caption: Tutorials
 
-    tutorials/pyrocs_tutorial
+    tutorials/pyrocs_tutorial_representative_analysis
     tutorials/pyrocs_tutorial_structural_comparisons
