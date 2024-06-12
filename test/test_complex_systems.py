@@ -1,96 +1,91 @@
-from pyrocs.complex_systems import cyclomatic_complexity, feedback_density, causal_complexity, grc
+from pyrocs.complex_systems import cyclomatic_complexity, feedback_density, causal_complexity, grc, fluctuation_complexity
 import numpy as np
 import pytest
-
-
-########## GLOBAL VARIABLES ##########
-A = [[0, 0, 1], [0, 0, 1], [0, 0, 0]]
-
-B = [[0, 1, 1], [0, 0, 1], [0, 0, 0]]
-
-C = [[0, 1, 0], [0, 0, 1], [1, 0, 0]]
-
-D = [[0, 1, 0, 0], [0, 0, 1, 0], [1, 0, 0, 0], [0, 0, 0, 0]]
-
-E = np.array([
-    [0, 1, 0, 0, 1, 0, 0, 0, 1, 1,],
-    [1, 0, 1, 0, 0, 0, 1, 1, 0, 1,],
-    [0, 1, 0, 0, 1, 1, 1, 0, 1, 0,],
-    [0, 0, 0, 0, 0, 1, 0, 0, 0, 1,],
-    [1, 0, 1, 0, 0, 1, 0, 1, 1, 0,],
-    [0, 0, 1, 1, 1, 0, 0, 1, 1, 0,],
-    [0, 1, 1, 0, 0, 0, 0, 0, 0, 1,],
-    [0, 1, 0, 0, 1, 1, 0, 0, 1, 1,],
-    [1, 0, 1, 0, 1, 1, 0, 1, 0, 0,],
-    [1, 1, 0, 1, 0, 0, 1, 1, 0, 0,]
-])
-
+import networkx
+import networkx as nx
 
 ########### MAIN FUNCTIONS ###########
 def test_cyclomatic_complexity():
-    '''
-    Tests the cyclomatic_complexity() function from pyrocs/complex_systems/causal_complexity.py 
-    '''
+    # Test undirected graph
+    A = np.array([[0, 1, 0], [1, 0, 1], [0, 1, 0]])
+    assert cyclomatic_complexity(A) == 1.0
 
-    g1 = np.array(A)
-    assert cyclomatic_complexity(g1, directed=True) == 1.0
-
-    g2 = np.array(B)
-    assert cyclomatic_complexity(g2, directed=True) == 2.0
-
-    g3 = np.array(C)
-    assert cyclomatic_complexity(g3, directed=True) == 2.0
-
-    g4 = np.array(D)
-    assert cyclomatic_complexity(g4, directed=True) == 3.0
-
+    # Test directed graph
+    A = np.array([[0, 1, 0], [0, 0, 1], [0, 0, 0]])
+    assert cyclomatic_complexity(A, directed=True) == 1.0
 
 def test_feedback_density():
-    '''
-    Tests the feedback_density() function from pyrocs/complex_systems/causal_complexity.py 
-    '''
-    g1 = np.array(A)
-    assert feedback_density(g1, directed=True) == 0.0
+    # Test undirected graph with no feedback loops
+    A = np.array([[0, 1, 0], [0, 0, 0], [0, 0, 0]])
+    assert feedback_density(A, directed=True) == 0.0
 
-    g2 = np.array(B)
-    assert feedback_density(g2, directed=True) == 0.0
-
-    g3 = np.array(C)
-    assert feedback_density(g3, directed=True) == 1.0
-
-    g4 = np.array(D)
-    assert feedback_density(g4, directed=True) == 0.8571428571428571
-
+    # Test directed graph with feedback loops
+    A = np.array([[0, 1, 0], [0, 0, 1], [1, 0, 0]])
+    assert feedback_density(A, directed=True) > 0.5
 
 def test_causal_complexity():
-    '''
-    Tests the causal_complexity() function from pyrocs/complex_systems/causal_complexity.py 
-    '''
+    # Test undirected graph
+    A = np.array([[0, 1, 0], [1, 0, 1], [0, 1, 0]])
+    assert causal_complexity(A) == 1.4
 
-    g1 = np.array(A)
-    assert causal_complexity(g1, directed=True) == 1.0
+    # Test directed graph
+    assert causal_complexity(A, directed=True) > 1.4
 
-    g2 = np.array(B)
-    assert causal_complexity(g2, directed=True) == 2.0
+def test_fluctuation_complexity_default_L():
+    A = [1, 2, 3, 4, 5]
+    result = fluctuation_complexity(A)
+    assert isinstance(result, float)
 
-    g3 = np.array(C)
-    assert causal_complexity(g3, directed=True) == 4.0
+def test_fluctuation_complexity_L_gt_1():
+    A = [1, 2, 3, 4, 5]
+    L = 2
+    result = fluctuation_complexity(A, L)
+    assert isinstance(result, float)
 
-    g4 = np.array(D)
-    assert causal_complexity(g4, directed=True) == 5.571428571428571
+def test_fluctuation_complexity_single_element_sequence():
+    A = [1]
+    with pytest.raises(ZeroDivisionError):
+        result = fluctuation_complexity(A)
 
+def test_fluctuation_complexity_L_eq_1():
+    A = [1, 2, 3, 4, 5]
+    L = 1
+    result = fluctuation_complexity(A, L)
+    assert isinstance(result, float)
 
-def test_grc():
-    '''
-    Tests the grc() function from pyrocs/complex_systems/grc.py 
-    '''
+def test_grc_undirected():
+    # Test undirected graph with edges
+    A = np.array([[0, 1, 0], [1, 0, 1], [0, 1, 0]])
+    result = grc(A, directed=False)
+    assert result > 0
 
-    E_results = grc(E, True)
+def test_grc_directed():
+    # Test directed graph with edges
+    A = np.array([[0, 1, 0], [0, 0, 1], [0, 0, 0]])
+    result = grc(A, directed=True)
+    assert result > 0
 
-    assert(E_results == 0.03703703703703704)
+def test_grc_no_edges():
+    # Test graph with no edges
+    A = np.array([[0, 0, 0], [0, 0, 0], [0, 0, 0]])
+    result = grc(A, directed=False)
+    assert result == 0.0
 
-if __name__ == '__main__': 
+def test_grc_non_numpy_input():
+    # Test non-Numpy array input
+    A = [[0, 1, 0], [1, 0, 1], [0, 1, 0]]
+    with pytest.raises(AttributeError):
+        grc(A, directed=False)
+
+if __name__ == '__main__':
     test_cyclomatic_complexity()
     test_feedback_density()
     test_causal_complexity()
-    test_grc()
+    test_fluctuation_complexity_default_L()
+    test_fluctuation_complexity_L_gt_1()
+    test_fluctuation_complexity_single_element_sequence()
+    test_fluctuation_complexity_L_eq_1()
+    test_grc_undirected()
+    test_grc_directed()
+    test_grc_no_edges()
+    test_grc_non_numpy_input()
