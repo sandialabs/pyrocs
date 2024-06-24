@@ -1,7 +1,7 @@
+from pyrocs.information_theory import kl_divergence, novelty_transience_resonance, discrete_entropy, mutual_info
+from scipy.stats import entropy
 import numpy as np
 import pytest
-from pyrocs.information_theory import kl_divergence, novelty_transience_resonance, discrete_entropy, mutual_info, entropy
-
 
 def test_kl_divergence():
     # Test with identical distributions
@@ -99,5 +99,4 @@ if __name__ == '__main__':
     test_discrete_entropy_all_elements_unique_input()
     test_discrete_entropy_all_elements_same_input()
     test_mutual_info()
-
 
