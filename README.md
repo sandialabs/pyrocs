@@ -1,6 +1,7 @@
 <img src="docs/_static/pyrocs-icon-1.png" width="400"/>
 
 # pyRoCS
+[![test](https://github.com/sandialabs/pyrocs/actions/workflows/test.yml/badge.svg)](https://github.com/sandialabs/pyrocs/actions/workflows/test.yml)
 
 pyRoCS is a library of functions used to support resilience analysis of complex systems. The package contains example datasets and tutorial to help demonstrate how the functions can be used. 
 
