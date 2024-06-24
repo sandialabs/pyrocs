@@ -1,5 +1,6 @@
-from pyrocs.information_theory import kl_divergence, novelty_transience_resonance, discrete_entropy, mutual_info, entropy
+from pyrocs.information_theory import kl_divergence, novelty_transience_resonance, discrete_entropy, mutual_info
 import numpy as np
+from scipy.stats import entropy
 import pytest
 
 def test_kl_divergence():
