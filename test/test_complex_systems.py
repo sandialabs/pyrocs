@@ -58,6 +58,12 @@ def test_grc_undirected():
     A = np.array([[0, 1, 0], [1, 0, 1], [0, 1, 0]])
     result = grc(A, directed=False)
     assert result > 0
+    
+def test_grc_weights():
+    # Test undirected graph with edges
+    A = np.array([[0, 2, 0], [1, 0, 2], [0, 1, 0]])
+    result = grc(A, directed=False, use_weights=True)
+    assert result > 0
 
 def test_grc_directed():
     # Test directed graph with edges
