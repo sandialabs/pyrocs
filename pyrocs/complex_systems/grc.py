@@ -2,7 +2,7 @@ import networkx as nx
 import numpy as np
 
 
-def grc(A : np.ndarray, directed : bool):
+def grc(A : np.ndarray, directed : bool, use_weights=False):
     """
     Global reaching centrality (GRC) measures the level of hierarchy within a network based on flow. 
     The equation within the package follows the formulations from 
@@ -26,9 +26,16 @@ def grc(A : np.ndarray, directed : bool):
         A: Square matrix of adjacencies in the network
         directed (bool): If true, assume A represents a directed graph (row -> column).
             If false, assume A represents an undirected graph.
+        use_weights (bool): If true, the nonzero values of A are
+        used as edge weights for the computation of grc.
     Returns:
         Global reaching centrality of the graph 
     """
+    if use_weights:
+        # by default, from_numpy_array assigns the nonzero values of A to the edges under the key "weight"
+        weight = "weight"
+    else:
+        weight = None
 
     if directed:
         G = nx.from_numpy_array(A, nx.DiGraph)
@@ -39,4 +46,4 @@ def grc(A : np.ndarray, directed : bool):
         print("WARNING: Social network to compute GRC over has no edges!")
         return 0.0
     else:
-        return nx.global_reaching_centrality(G)
+        return nx.global_reaching_centrality(G, weight=weight)
