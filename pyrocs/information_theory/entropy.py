@@ -18,7 +18,7 @@ def discrete_entropy(
     
         H = - \\sum_{i=1}^N [p_i * \\log p_i]
     
-    where :math:`H` = entropy, :math:`p` = discrete probability of the occurrence of an event from the :math:`i`th category, 
+    where :math:`H` = entropy, :math:`p` = discrete probability of the occurrence of an event from the :math:`i^{\mathrm{th}}` category, 
     and :math:`N` is the total number of categories. Low entropy values indicate a higher state of disorder 
     while higher entropy values indicate a well-ordered system. The maximum possible value of the
     entropy for a given system is :math:`log(N)`, and is thus varies by group size. Please see 
