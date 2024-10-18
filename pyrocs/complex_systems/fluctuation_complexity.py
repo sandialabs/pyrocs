@@ -2,7 +2,7 @@ import math
 from collections import Counter
 from functools import lru_cache
 
-def fluctuation_complexity(A : list, L : int = 1):
+def fluctuation_complexity(A, L : int = 1) -> float:
     '''
     
     Fluctuating complexity extends the characterization of discrete entropy 
@@ -24,10 +24,10 @@ def fluctuation_complexity(A : list, L : int = 1):
     respective frequencies of event :math:`i` and :math:`j` within the series. 
     
     Args:
-        A: Sequence of symbols
-        L: If > 1, groups symbols into short subsequences of length L.
+        A (array): Sequence of symbols
+        L (int): If > 1, groups symbols into short subsequences of length L.
     Returns:
-        The Fluctuation Complexity of the sequence
+        float
     '''
     if L > 1:
         A = [tuple(A[i: i + L]) for i in range(len(A) + 1 - L)]

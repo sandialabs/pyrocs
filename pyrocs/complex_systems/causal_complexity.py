@@ -2,7 +2,7 @@ import numpy as np
 import networkx as nx
 
 
-def cyclomatic_complexity(A : np.ndarray, directed : bool = False):
+def cyclomatic_complexity(A : np.ndarray, directed : bool = False) -> float:
     '''
     Cyclomatic complexity reflects the number of linearly 
     independent paths within a system of interest 
@@ -23,9 +23,9 @@ def cyclomatic_complexity(A : np.ndarray, directed : bool = False):
     higher cyclomatic complexity values).     
     
     Args:
-        A: array
+        A (array)
     Returns:
-        cyclomatic complexity of the graph   
+        float
     '''
 
     if directed:
@@ -43,7 +43,7 @@ def cyclomatic_complexity(A : np.ndarray, directed : bool = False):
 
     return E - N + 2.0 * P 
 
-def feedback_density(A : np.ndarray, directed : bool = False):
+def feedback_density(A : np.ndarray, directed : bool = False) -> float:
     '''
     Feedback density captures the fraction of edges :math:`(E_{loop})` 
     and nodes (:math:`N_{loop}`) that are involved in at least one feedback loop.
@@ -64,9 +64,9 @@ def feedback_density(A : np.ndarray, directed : bool = False):
     edges are included in one or more feedback loops.
     
     Args:
-        A: array
+        A (array)
     Returns:
-        feedback density of the graph   
+        float
     '''
 
     if directed: 
@@ -95,7 +95,7 @@ def feedback_density(A : np.ndarray, directed : bool = False):
 
     return (Eloop + Nloop) / (Etot + Ntot)
 
-def causal_complexity(A: np.ndarray, directed : bool = False):
+def causal_complexity(A: np.ndarray, directed : bool = False) -> float:
     '''
     Causal complexity measures the underlying causal structure 
     of a system by considering both the system’s intricacy as
@@ -124,9 +124,9 @@ def causal_complexity(A: np.ndarray, directed : bool = False):
     of causal complexity than those systems with lower feedback density.
     
     Args:
-        A: array
+        A (array)
     Returns:
-        causal complexity of the graph
+        float
     '''
     M = cyclomatic_complexity(A, directed=directed)
     D = feedback_density(A, directed=directed)

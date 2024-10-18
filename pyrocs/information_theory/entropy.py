@@ -1,15 +1,13 @@
 
 from collections import Counter
-from collections.abc import Sequence
-
 from scipy.stats import entropy
 import numpy as np
 
 
 def discrete_entropy(
-        values: Sequence,
-        counts: Sequence = None,
-        base: int = 2) -> float:
+    values: np.ndarray, 
+    counts: np.ndarray = None, 
+    base: int = 2) -> float:
     """
     Entropy is often used to measure the state of disorder/randomness in a system. 
     The general equation follows the form:
@@ -33,11 +31,11 @@ def discrete_entropy(
     `scipy documentation <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.entropy.html>`_ as well as the references noted above. 
 
     Args:
-        values (Sequence): Sequence of observed values from a random process
-        counts (Sequence[int]): Number of times each value was observed
+        values (array): Sequence of observed values from a random process
+        counts (array[int]): Number of times each value was observed
         base (int): Base of returned entropy (default returns number of bits)
     Returns:
-        mutual information between x and y
+        float
     """
     
     if counts is None:
