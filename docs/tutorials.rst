@@ -15,3 +15,4 @@ captured in the below tutorials.
 
     tutorials/pyrocs_tutorial_representative_analysis
     tutorials/pyrocs_tutorial_structural_comparisons
+    tutorials/pyrocs_tutorial_water_network_resilience
