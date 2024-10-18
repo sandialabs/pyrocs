@@ -3,7 +3,7 @@ from itertools import repeat
 import numpy as np
 from pandas import DataFrame
 
-def affinity(data: np.ndarray, weights=None) -> float:
+def affinity(data: np.ndarray, weights=None, to_bool=bool) -> float:
     """
     Returns the affinity between all pairs of columns in binary data.
 
@@ -25,6 +25,7 @@ def affinity(data: np.ndarray, weights=None) -> float:
     Args:
         data (array) 
         weights (optional array) 
+        to_bool: function or type to convert array values to boolean
         
     Returns:
         float
@@ -46,9 +47,9 @@ def affinity(data: np.ndarray, weights=None) -> float:
     counter = {}
     for row, weight in zip(rows, weights):
         for i in range(num_cols):
-            i_val = bool(row[i])
+            i_val = to_bool(row[i])
             for j in range(i, num_cols):
-                j_val = bool(row[j])
+                j_val = to_bool(row[j])
                 key = (i, j, i_val, j_val)
                 counter[key] = counter.get(key, 0) + weight
                 
