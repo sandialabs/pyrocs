@@ -23,8 +23,8 @@ def affinity(data: np.ndarray, weights=None, to_bool=bool) -> float:
     results in a binary implementation of affinity within this software.
     
     Args:
-        data (array) 
-        weights (optional array) 
+        data (array): Matrix of co-occurring variables
+        weights (optional array): weights for each variable
         to_bool: function or type to convert array values to boolean
         
     Returns:

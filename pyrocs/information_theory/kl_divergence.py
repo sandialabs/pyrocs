@@ -79,7 +79,7 @@ def novelty_transience_resonance(
         thetas_arr (array): rows are topic mixtures
         window (int): positive integer defining scale or scale size
     Returns:
-        tuple(array): novelties, transiences, resonances   
+        tuple(array) [novelties, transiences, resonances] 
     """
 
     # Find the first and last center speech offset, given window size.

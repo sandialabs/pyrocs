@@ -23,7 +23,7 @@ def cyclomatic_complexity(A : np.ndarray, directed : bool = False) -> float:
     higher cyclomatic complexity values).     
     
     Args:
-        A (array)
+        A (array): Adjacency matrix of graph structure
     Returns:
         float
     '''
@@ -64,7 +64,7 @@ def feedback_density(A : np.ndarray, directed : bool = False) -> float:
     edges are included in one or more feedback loops.
     
     Args:
-        A (array)
+        A (array): Adjacency matrix of graph structure
     Returns:
         float
     '''
@@ -124,7 +124,7 @@ def causal_complexity(A: np.ndarray, directed : bool = False) -> float:
     of causal complexity than those systems with lower feedback density.
     
     Args:
-        A (array)
+        A (array): Adjacency matrix of graph structure
     Returns:
         float
     '''
