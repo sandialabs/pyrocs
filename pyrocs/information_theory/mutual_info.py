@@ -1,15 +1,11 @@
-
-from collections.abc import Sequence
-import os
-import sys
-    
+import numpy as np
 from pyrocs.information_theory import discrete_entropy
 
 
 def mutual_info(
-        x: Sequence,
-        y: Sequence,
-        counts: Sequence = None,
+        x: np.ndarray,
+        y: np.ndarray,
+        counts: np.ndarray = None,
         base: int = 2) -> float:
     """
     Mutual information measures how much knowledge is gained about one random variable when another is observed.
@@ -36,14 +32,16 @@ def mutual_info(
     when the other is observed.
 
     Args:
-        x,y (numpy.ndarray): arrays, discretized observations from random
-            distributions x \in X and y \in Y
-        counts (Sequence[int]): If present, the number of times each (x,y) pair was
+        x (array): discretized observations from random
+            distribution x \in X
+        y (array): discretized observations from random
+            distribution y \in Y
+        counts (array[int]): If present, the number of times each (x,y) pair was
             observed
         base (int): If present the base in which to return the entropy
 
     Returns:
-        mutual information between x and y
+        float
     """
     x_entropy = discrete_entropy(x, counts, base)
     y_entropy = discrete_entropy(y, counts, base)

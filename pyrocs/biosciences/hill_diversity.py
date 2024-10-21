@@ -2,7 +2,7 @@ import math
 import numpy as np
 
 
-def hill_shannon(p: np.array) -> float:
+def hill_shannon(p: np.ndarray) -> float:
     """
     The Hill-Shannon number is a specific instance (i.e. the Perplexity) of Hill Diversity, 
     which prioritizes neither common nor rare species. 
@@ -20,15 +20,15 @@ def hill_shannon(p: np.array) -> float:
     where :math:`q` approaches :math:`1` and the mean is the geometric mean
     
     Args:
-        p: p[i] is the proportion of all individuals that belong to species i
+        p (array): p[i] is the proportion of all individuals that belong to species i
     Returns:
-        A metric for effective count of species (diversity)
+        float
     """
     entropy = -sum(x * np.log(x) for x in p if x > 0)
     return math.exp(entropy)
 
 
-def hill_simpson(p: np.array) -> float:
+def hill_simpson(p: np.ndarray) -> float:
     """
     The Hill-Simpson number is a specific instance (i.e. the Inverse Simpson Index) 
     of Hill Diversity that prioritizes the common species. 
@@ -45,14 +45,14 @@ def hill_simpson(p: np.array) -> float:
     where :math:`q=2` and the mean is the usual arithmetic mean
 
     Args:
-        p: p[i] is the proportion of all individuals that belong to species i
+        p (array): p[i] is the proportion of all individuals that belong to species i
     Returns:
-        A metric for effective count of species (diversity)
+        float
     """
     return 1.0 / p.dot(p)
 
 
-def hill_diversity(p: np.array, q: float) -> float:
+def hill_diversity(p: np.ndarray, q: float) -> float:
     """
     The Hill Numbers are a family of diversity metrics describing "effective number of species".
     
@@ -87,11 +87,11 @@ def hill_diversity(p: np.array, q: float) -> float:
     species :math:`i`, :math:`q` is the exponent that determines the rarity scale on which the mean is taken
     
     Args:
-        p: p[i] is the proportion of all individuals that belong to species i, 
-        q: The exponent that determines the rarity scale on which the mean is taken.
+        p (array): p[i] is the proportion of all individuals that belong to species i, 
+        q (float): The exponent that determines the rarity scale on which the mean is taken.
             Species richness (q=0), Hill-Simpson diversity (q=2), Hill-Shannon diversity (q=1), 
     Returns:
-        D: a metric for effective count of species (diversity) 
+        float
     """
 
     # Special cases

@@ -1,7 +1,6 @@
 import numpy as np
-# from scipy.special import xlogy
 
-def kl_divergence(p: np.array, q: np.array, base: int = 2) -> np.array:
+def kl_divergence(p: np.ndarray, q: np.ndarray, base: int = 2) -> float:
     """
     Sometimes called relative entropy, the Kullback-Leibler Divergence (KLD) 
     measures the similarity between two distributions 
@@ -17,21 +16,18 @@ def kl_divergence(p: np.array, q: np.array, base: int = 2) -> np.array:
         
     where :math:`D` is the KLD value, :math:`N` is the total number of categories, 
     and :math:`p_i` and :math:`q_i` reflect the discrete probability of the occurrence 
-    of an event from the :math:`i`th category of the sample distribution and 
+    of an event from the :math:`i^{\mathrm{th}}` category of the sample distribution and 
     reference distribution respectively.
 
     The function is able to calculate KLD for cases where not all categories from the reference distribution are present within the sample distribution. 
 
     Args:
-        p,q (numpy.ndarray): arrays, where rows for each constitute the two
-        probability distributions from which to calculate divergence. p
-        contains the distributions holding probabilities in the numerator of the
-        KL divergence summand.
-        base: log base to compute from; base 2 (bits), base 10 (decimal/whole numbers), or base e (ecology, earth systems)
+        p (array): discrete probability distribution
+        q (array): discrete probability distribution
+        base (int): log base to compute from; base 2 (bits), base 10 (decimal/whole numbers), or base e (ecology, earth systems)
 
     Returns:
-        numpy.ndarray: KL divergences, where the second array's rows are the
-        distributions in the numerator of the log in KL divergence
+        float
     """
 
     assert p.shape == q.shape, 'p and q shapes must be identical'
@@ -52,7 +48,9 @@ def kl_divergence(p: np.array, q: np.array, base: int = 2) -> np.array:
     return kl_div
 
 
-def novelty_transience_resonance(thetas_arr : np.array, window : int) -> list:
+def novelty_transience_resonance(
+    thetas_arr: np.ndarray, 
+    window: int) -> tuple[np.ndarray]:
     """
     These three related metrics extend the Kullback-Leibler Divergence formulation to consider how 
     a distribution differs from past and future distributions within a sequence. Specifically, novelty 
@@ -66,8 +64,8 @@ def novelty_transience_resonance(thetas_arr : np.array, window : int) -> list:
     
     .. math::
     
-        N_w(p_i) &= (1/w)Sum(1 \\leq k \\leq w)[D(p_i || p_(i-k))]\\\\
-        T_w(p_i) &= (1/w)Sum(1 \\leq k \\leq w)[D(p_i || p_(i+k))]\\\\
+        N_w(p_i) &= (1/w)\sum(1 \\leq k \\leq w)[D(p_i || p_(i-k))]\\\\
+        T_w(p_i) &= (1/w)\sum(1 \\leq k \\leq w)[D(p_i || p_(i+k))]\\\\
         R_w(p_i) &= N_w(p_i) - T_w(p_i)
         
     where :math:`N` is novelty, :math:`T` is transience, :math:`R` is resonance, 
@@ -78,12 +76,10 @@ def novelty_transience_resonance(thetas_arr : np.array, window : int) -> list:
     equation for the KLD.
 
     Args:
-        thetas_arr (numpy.ndarray): rows are topic mixtures
+        thetas_arr (array): rows are topic mixtures
         window (int): positive integer defining scale or scale size
     Returns:
-        novelties 
-        transiences 
-        resonances    
+        tuple(array): novelties, transiences, resonances   
     """
 
     # Find the first and last center speech offset, given window size.

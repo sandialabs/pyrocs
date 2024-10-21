@@ -1,10 +1,9 @@
 
 from itertools import repeat
-from typing import Union
 import numpy as np
 from pandas import DataFrame
 
-def affinity(data: Union[np.array, DataFrame], weights=None, to_bool=bool) -> np.array:
+def affinity(data: np.ndarray, weights=None, to_bool=bool) -> float:
     """
     Returns the affinity between all pairs of columns in binary data.
 
@@ -24,13 +23,12 @@ def affinity(data: Union[np.array, DataFrame], weights=None, to_bool=bool) -> np
     results in a binary implementation of affinity within this software.
     
     Args:
-        data: array or dataframe 
-        weights: (optional) float or array 
-        to_bool: boolean type
+        data (array) 
+        weights (optional array) 
+        to_bool: function or type to convert array values to boolean
         
     Returns:
-        affinity between columns in data
-    
+        float
     """
     
     num_cols = data.shape[1]

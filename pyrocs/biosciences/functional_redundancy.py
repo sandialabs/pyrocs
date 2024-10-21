@@ -1,6 +1,6 @@
 import numpy as np
 
-def functional_redundancy(p: np.array, delta: np.array) -> float:
+def functional_redundancy(p: np.ndarray, delta: np.ndarray) -> float:
     '''
     This metric evaluates how interchangeable groups within a population are based 
     on the specific function they perform. As a biological concept, 
@@ -18,19 +18,15 @@ def functional_redundancy(p: np.array, delta: np.array) -> float:
         D &= \\sum_i(p_i*(1-p_i))
 
     Args:
-    ----------
-    p : np.array
-        Relative abundances p[i] (i = 1, 2,…,N) with 0 < p[i] ≤ 1 and where the constraint 0 < p[i]
-        means that all calculations involve only those species that are actually present in 
-        the assemblage with nonzero abundances.
-    delta : np.array
-        :math:`δ_{ij}` symmetric array of pairwise functional dissimilarities between species i and j 
+        p (array): Relative abundances p[i] (i = 1, 2,…,N) with 0 < p[i] ≤ 1 
+            and where the constraint 0 < p[i]
+            means that all calculations involve only those species that 
+            are actually present in the assemblage with nonzero abundances.
+        delta (array): :math:`δ_{ij}` symmetric array of pairwise functional 
+            dissimilarities between species i and j 
 
     Returns:
-    --------
-    FR : float
-        Functional Redundancy Score
-
+        float
     '''
    
     dim = len(p)
