@@ -23,7 +23,7 @@ def grc(A : np.ndarray, directed : bool) -> float:
     versa :cite:p:`lakkaraju_complexity_2019`.
 
     Args:
-        A (array): Square matrix of adjacencies in the network
+        A (array): Adjacency matrix of graph structure
         directed (bool): If true, assume A represents a directed graph (row -> column).
             If false, assume A represents an undirected graph.
     Returns:
