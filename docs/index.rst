@@ -17,7 +17,50 @@ Python environment.
 
 To get started, we recommend exploring the pyrocs :ref:`tutorials<tutorials>`.
 
-The :ref:`API documentation<apidoc>` provides additional details about the functions included in the package.
+Datasets can be analyzed in multiple ways using using functions within pyRoCS. 
+While most of these datasets are in array formats, they reflect different underlying 
+structures, with some representing counts of entries and
+sequences and other representing summaries of graph-based structures. The below table summarizes
+current functionality. Letters in parentheticals indicate which module the function is located:
+information theory \(I), bioscience \(B), or complex systems \(C).
+
+.. list-table:: (Module) Functions and Primary Data Inputs
+   :widths: 25 75
+   :header-rows: 1
+
+   * - (Module) Function
+     - Primary Data Inputs
+   * - \(I) discrete_entropy
+     - Unique entries in a process and associated counts
+   * - \(I) kl_divergence
+     - Two arrays of probability distributions
+   * - \(I) novelty_transience_resonance
+     - An array of probability distribution
+   * - \(I) mutual_info
+     - Two arrays of entries (optional: counts)
+   * - \(B) affinity
+     - Matrix of co-occurring variables (optional: weights)
+   * - \(B) functional_redundancy
+     - Array of relative abundance and array of symmetric similarities
+   * - \(B) hill_diversity
+     - Proportion of individuals in group
+   * - \(B) hill_shannon
+     - Proportion of individuals in group
+   * - \(B) hill_simpson
+     - Proportion of individuals in group
+   * - \(C) causal_complexity
+     - Adjacency matrix of graph structure
+   * - \(C) cyclomatic_complexity
+     - Adjacency matrix of graph structure
+   * - \(C) feedback_density
+     - Adjacency matrix of graph structure
+   * - \(C) fluctuation_complexity
+     - Array of sequenced events
+   * - \(C) grc
+     - Adjacency matrix of graph structure
+
+The :ref:`API documentation<apidoc>` provides additional details about the functions 
+included in the package.
 
 .. toctree::
     :maxdepth: 1
