@@ -66,7 +66,7 @@ current functionality and their corresponding data inputs organized by module.
    * - Complex Systems
      - feedback_density
      - Adjacency matrix of graph structure
-   * - Complex Ssystems
+   * - Complex Systems
      - fluctuation_complexity
      - Array of sequenced events
    * - Complex Systems
